@@ -4,11 +4,17 @@ import resolve from 'rollup-plugin-node-resolve'
 
 export default {
   input: 'index.js',
-  output: {
-    file: 'atomax-connector.js',
-    name: 'AtomaxConnector',
-    format: 'iife'
-  },
+  output: [
+    {
+      file: 'dist/atomax-connector.js',
+      name: 'AtomaxConnector',
+      format: 'iife'
+    },
+    {
+      file: 'dist/atomax-connector-es.js',
+      format: 'es'
+    }
+  ],
   plugins: [
     babel({
       exclude: 'node_modules/**',

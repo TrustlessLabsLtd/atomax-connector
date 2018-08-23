@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "start": "node index.js",
-    "build": "rollup -c"
+    "postinstall": "rollup -c"
   },
   "repository": "TrustlessLabsLtd/atomax-connector",
   "homepage": "https://atomax.io/",

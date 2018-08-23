@@ -1,12 +1,14 @@
 {
   "name": "atomax-connector",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Javascript library that allows a web app to connect with the Atomax Wallet",
   "main": "index.js",
   "scripts": {
     "start": "node index.js",
     "build": "rollup -c"
   },
+  "repository": "TrustlessLabsLtd/atomax-connector",
+  "homepage": "https://atomax.io/",
   "keywords": [
     "wallet",
     "atomax",

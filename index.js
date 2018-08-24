@@ -3,8 +3,8 @@ import 'firebase/database'
 import Connector from 'qrcode-generator'
 
 /*
-  TODO: change variables like "data", "size", "padding"
-  with more descritive one. 
+  TODO: change variables like "to", "data", "size", "padding"
+  with more descritive one.
 */
 
 const createConnectorImg = async ({connectorName, to, ethQty, gasPrice = null, gasLimit = null, nonce = null, data = null, size = 5, padding = 10, addressCB, txIdCB}) => {

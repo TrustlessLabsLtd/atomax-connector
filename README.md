@@ -51,10 +51,9 @@ The AtomaxConnector accept 3 parameter:
 
 1. **Transaction Data** *(Object)*
 
-  ** name: REQUIRED - "The name of the connector is used to identify
+  * name: REQUIRED - "The name of the connector is used to identify
   each connector placed in one application. You need to
   specify a differente name for each connector istanciated"
-
   * value: REQUIRED - "Is the ETH value in the transaction"
   * gasPrice: OPTIONAL
   * gasLimit: OPTIONAL

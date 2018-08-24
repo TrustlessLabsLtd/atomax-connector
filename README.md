@@ -1,3 +1,5 @@
+!(ATOMAX)[https://raw.githubusercontent.com/TrustlessLabsLtd/static-files/master/Icona_Atomax_Android_3.png]
+
 # Atomax Connector
 
 Javascript library that allows a web app to connect with the Atomax Wallet

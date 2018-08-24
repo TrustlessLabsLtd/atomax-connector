@@ -1,4 +1,4 @@
-![ATOMAX](https://raw.githubusercontent.com/TrustlessLabsLtd/static-files/master/Icona_Atomax_Android_3.png)
+![ATOMAX](https://raw.githubusercontent.com/TrustlessLabsLtd/static-files/master/Icona_Atomax_Android_3.png  width=210 align=center)
 
 
 

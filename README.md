@@ -30,6 +30,40 @@ Using npm:
 
 ## Usage
 
+The AtomaxConnector has as main scope setting up the transaction
+information in the atomax wallet.
+
+The AtomaxConnector accept 3 parameter:
+1. Transaction Data (Object)
+2. Callback for retrive the wallet address
+3. Callback for retrive the transaction ID, when the wallet send the transaction.
+
+
+1. Transaction Data (Object)
+
+  ** name: REQUIRED - "The name of the connector is used to identify
+  each connector placed in one application. You need to
+  specify a differente name for each connector istanciated"
+
+  * value: REQUIRED - "Is the ETH value in the transaction"
+  * gasPrice: OPTIONAL
+  * gasLimit: OPTIONAL
+  * nonce: OPTIONAL
+  * data: OPTIONAL - here you can add optional raw data in hexadecimal format only.
+
+
+2. Callback for retrive the wallet address
+
+  * return the address
+
+
+3. Callback for retrive the transaction ID, when the wallet send the transaction.
+
+  * return the transaction ID
+
+
+### A simple example of use
+
 ```html
 <html>
   <head>

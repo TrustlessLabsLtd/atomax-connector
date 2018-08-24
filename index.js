@@ -52,17 +52,11 @@ const existsOnFirebase = async (sessionId) => {
   return !!session
 }
 
-/*
-  TODO: change this variable "value" in ethQty
-*/
 const sameDataOnFirebase = async (sessionId, to, value, gasPrice, gasLimit, nonce, data) => {
   const tx = (await firebase.database().ref(`sessions/${sessionId}/tx`).once('value')).val()
   return tx.to === to && tx.value === value && tx.gasPrice === gasPrice && tx.gasLimit === gasLimit && tx.nonce === nonce && tx.data === data
 }
 
-/*
-  TODO: change this variable "value" in ethQty
-*/
 const startSocket = (connectorName, sessionId, addressCB, txIdCB) => {
   firebase.database().ref(`sessions/${sessionId}/address`).on('value', (snapshot) => {
     addressCB(snapshot.val())

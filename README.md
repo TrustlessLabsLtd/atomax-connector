@@ -4,7 +4,8 @@
 
 # Atomax Connector
 
-Javascript library that allows a web app to connect with the Atomax Wallet
+Javascript library that allows a web app to connect with the Atomax Wallet.
+Atomax Wallet is a mobile application, available for [iOS](https://itunes.apple.com/us/app/atomax-wallet-lite/id1415885195) and [Android](https://play.google.com/store/apps/details?id=com.atomax_wallet). 
 
 [![NPM](https://nodei.co/npm/atomax-connector.png)](https://nodei.co/npm/atomax-connector/)
 

@@ -12,6 +12,10 @@
 
   <script>
     var atomaxDiv = document.getElementById('atomaxConnector')
+
+    /*
+      initialize the Connector
+    */
     AtomaxConnector({
       name: 'test',
       to: '0xbd3696b01a487b012ba99628b06a1a7859f5ca23',
@@ -28,8 +32,8 @@
         var txDiv = document.getElementById('tx')
         txDiv.innerHTML = tx.id || null
       }
-    }).then(qrcode => {
-      atomaxDiv.innerHTML = qrcode
+    }).then(connector => {
+      atomaxDiv.innerHTML = connector
     })
 
   </script>

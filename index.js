@@ -1,8 +1,8 @@
 import firebase from 'firebase/app'
 import 'firebase/database'
-import QRCode from 'qrcode-generator'
+import Connector from 'qrcode-generator'
 
-const createQRCode = async ({name, to, value, gasPrice = null, gasLimit = null, nonce = null, data = null, size = 5, padding = 10, addressCB, txIdCB}) => {
+const createConnectorImg = async ({name, to, value, gasPrice = null, gasLimit = null, nonce = null, data = null, size = 5, padding = 10, addressCB, txIdCB}) => {
   var config = {
     apiKey: 'AIzaSyAAS3GK4zF6ZFpDYZuBuF5HCATEyBL8m4w',
     authDomain: 'whitelist-8a24c.firebaseapp.com',
@@ -30,13 +30,13 @@ const createQRCode = async ({name, to, value, gasPrice = null, gasLimit = null, 
     window.localStorage.setItem(name, sessionId)
   }
 
-  const qr = new QRCode(0, 'H')
-  qr.addData('atomax-connector:' + sessionId)
-  qr.make()
+  const connectorImg = new Connector(0, 'H')
+  connectorImg.addData('atomax-connector:' + sessionId)
+  connectorImg.make()
 
   startSocket(name, sessionId, addressCB, txIdCB)
 
-  return qr.createSvgTag(size, padding)
+  return connectorImg.createSvgTag(size, padding)
 }
 
 const existsOnFirebase = async (sessionId) => {
@@ -62,4 +62,4 @@ const startSocket = (name, sessionId, addressCB, txIdCB) => {
   })
 }
 
-export default createQRCode
+export default createConnectorImg

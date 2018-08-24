@@ -16,7 +16,7 @@
     "ethereum",
     "erc20"
   ],
-  "author": "linosorice",
+  "author": "atomax",
   "license": "MIT",
   "dependencies": {
     "firebase": "^5.4.0",

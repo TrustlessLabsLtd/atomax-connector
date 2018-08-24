@@ -1,6 +1,26 @@
 # Atomax Connector
 
+Javascript library that allows a web app to connect with the Atomax Wallet
+
 [![NPM](https://nodei.co/npm/atomax-connector.png)](https://nodei.co/npm/atomax-connector/)
+
+## Getting Started
+
+The following instructions will get you a copy of the project up and running on your local machine.
+
+### Prerequisites
+
+What things you need to install the software and how to install them
+
+* [Node.js](https://nodejs.org/)
+* [NPM](https://www.npmjs.com/)
+
+
+## Built With
+
+* Node.js
+* Rollup
+* Babel
 
 ## Installation
 

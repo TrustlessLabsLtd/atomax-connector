@@ -1,6 +1,6 @@
-```html
-<center><img src="https://raw.githubusercontent.com/TrustlessLabsLtd/static-files/master/Icona_Atomax_Android_3.png" style="max-width:200px;"></center>
-```
+![ATOMAX](https://raw.githubusercontent.com/TrustlessLabsLtd/static-files/master/Icona_Atomax_Android_3.png)
+
+
 
 # Atomax Connector
 

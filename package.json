@@ -1,6 +1,6 @@
 {
   "name": "atomax-connector",
-  "version": "1.0.7",
+  "version": "1.0.8",
   "description": "Javascript library that allows a web app to connect with the Atomax Wallet",
   "main": "index.js",
   "scripts": {
@@ -11,7 +11,7 @@
   "homepage": "https://atomax.io/",
   "keywords": [
     "wallet",
-    "atomax"
+    "atomax",
     "ethereum",
     "erc20"
   ],

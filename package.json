@@ -1,6 +1,6 @@
 {
   "name": "atomax-connector",
-  "version": "1.0.8",
+  "version": "1.0.9",
   "description": "Javascript library that allows a web app to connect with the Atomax Wallet",
   "main": "index.js",
   "scripts": {

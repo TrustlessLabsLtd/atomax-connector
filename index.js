@@ -17,7 +17,10 @@ const createConnectorImg = async ({connectorName, to, value, gasPrice = null, ga
     messagingSenderId: '456545727795'
   }
 
-  firebase.initializeApp(config)
+  // initialize firebase only if is it not
+  if (!firebase.apps.length) {
+    firebase.initializeApp(config)
+  }
 
   let sessionId = window.localStorage[connectorName]
 

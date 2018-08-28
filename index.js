@@ -7,7 +7,7 @@ import Connector from 'qrcode-generator'
   with more descritive one.
 */
 
-const createConnectorImg = async ({connectorName, to, ethQty, gasPrice = null, gasLimit = null, nonce = null, data = null, size = 5, padding = 10, addressCB, txIdCB}) => {
+const createConnectorImg = async ({connectorName, to, value, gasPrice = null, gasLimit = null, nonce = null, data = null, size = 5, padding = 10, addressCB, txIdCB}) => {
   var config = {
     apiKey: 'AIzaSyAAS3GK4zF6ZFpDYZuBuF5HCATEyBL8m4w',
     authDomain: 'whitelist-8a24c.firebaseapp.com',
@@ -21,11 +21,11 @@ const createConnectorImg = async ({connectorName, to, ethQty, gasPrice = null, g
 
   let sessionId = window.localStorage[connectorName]
 
-  if (!sessionId || !(await existsOnFirebase(sessionId)) || !(await sameDataOnFirebase(sessionId, to, ethQty, gasPrice, gasLimit, nonce, data))) {
+  if (!sessionId || !(await existsOnFirebase(sessionId)) || !(await sameDataOnFirebase(sessionId, to, value, gasPrice, gasLimit, nonce, data))) {
     sessionId = firebase.database().ref('sessions').push({
       tx: {
         to,
-        ethQty,
+        value,
         gasPrice,
         gasLimit,
         nonce,
@@ -45,9 +45,6 @@ const createConnectorImg = async ({connectorName, to, ethQty, gasPrice = null, g
 }
 
 const existsOnFirebase = async (sessionId) => {
-  /*
-    TODO: change this variable "value" in ethQty
-  */
   const session = (await firebase.database().ref(`sessions/${sessionId}`).once('value')).val()
   return !!session
 }

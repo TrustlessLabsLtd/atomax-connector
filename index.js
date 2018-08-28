@@ -51,7 +51,7 @@ const existsOnFirebase = async (sessionId) => {
 
 const sameDataOnFirebase = async (sessionId, to, value, gasPrice, gasLimit, nonce, data) => {
   const tx = (await firebase.database().ref(`sessions/${sessionId}/tx`).once('value')).val()
-  return tx.to === to && tx.value === value && tx.gasPrice === gasPrice && tx.gasLimit === gasLimit && tx.nonce === nonce && tx.data === data
+  return tx.to == to && tx.value == value && tx.gasPrice == gasPrice && tx.gasLimit == gasLimit && tx.nonce == nonce && tx.data == data
 }
 
 const startSocket = (connectorName, sessionId, addressCB, txIdCB) => {

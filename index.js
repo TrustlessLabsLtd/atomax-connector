@@ -26,7 +26,10 @@ const createConnectorImg = async ({ connectorName, signature = false, signatureM
 
   let tx
   if (signature) {
+    // TODO: to and value should be removed (retrocompatibility issue)
     tx = {
+      to,
+      value,
       signature,
       signatureMessage
     }

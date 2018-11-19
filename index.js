@@ -2,12 +2,12 @@ import firebase from 'firebase/app'
 import 'firebase/database'
 import Connector from 'qrcode-generator'
 
-/*
-  TODO: change variables like "to", "data", "size", "padding"
-  with more descritive one.
-*/
+const createConnectorImg = async ({ connectorName, signature = false, signatureMessage = null, to = null, value = null, gasPrice = null, gasLimit = null, nonce = null, data = null, size = 5, padding = 10, returnOnlyData = false, addressCB, txIdCB, messageSignedCB }) => {
+  if (!signature && !to && !value) {
+    console.log('[atomax-connector] You must define "to" and "value" parameters')
+    return
+  }
 
-const createConnectorImg = async ({connectorName, to, value, gasPrice = null, gasLimit = null, nonce = null, data = null, size = 5, padding = 10, returnOnlyData = false, addressCB, txIdCB}) => {
   var config = {
     apiKey: 'AIzaSyAAS3GK4zF6ZFpDYZuBuF5HCATEyBL8m4w',
     authDomain: 'whitelist-8a24c.firebaseapp.com',
@@ -24,16 +24,26 @@ const createConnectorImg = async ({connectorName, to, value, gasPrice = null, ga
 
   let sessionId = window.localStorage[connectorName]
 
-  if (!sessionId || !(await existsOnFirebase(sessionId)) || !(await sameDataOnFirebase(sessionId, to, value, gasPrice, gasLimit, nonce, data))) {
+  let tx
+  if (signature) {
+    tx = {
+      signature,
+      signatureMessage
+    }
+  } else {
+    tx = {
+      to,
+      value,
+      gasPrice,
+      gasLimit,
+      nonce,
+      data
+    }
+  }
+
+  if (!sessionId || !(await existsOnFirebase(sessionId)) || !(await sameDataOnFirebase(sessionId, signature, signatureMessage, to, value, gasPrice, gasLimit, nonce, data))) {
     sessionId = firebase.database().ref('sessions').push({
-      tx: {
-        to,
-        value,
-        gasPrice,
-        gasLimit,
-        nonce,
-        data
-      }
+      tx
     }).key
     window.localStorage.setItem(connectorName, sessionId)
   }
@@ -43,11 +53,13 @@ const createConnectorImg = async ({connectorName, to, value, gasPrice = null, ga
   connectorImg.addData(dataValue)
   connectorImg.make()
 
-  startSocket(connectorName, sessionId, addressCB, txIdCB)
+  if (signature) {
+    startSignatureSocket(connectorName, sessionId, addressCB, messageSignedCB)
+  } else {
+    startSocket(connectorName, sessionId, addressCB, txIdCB)
+  }
 
   return returnOnlyData ? dataValue : connectorImg.createSvgTag(size, padding)
-
-
 }
 
 const existsOnFirebase = async (sessionId) => {
@@ -55,9 +67,9 @@ const existsOnFirebase = async (sessionId) => {
   return !!session
 }
 
-const sameDataOnFirebase = async (sessionId, to, value, gasPrice, gasLimit, nonce, data) => {
+const sameDataOnFirebase = async (sessionId, signature, signatureMessage, to, value, gasPrice, gasLimit, nonce, data) => {
   const tx = (await firebase.database().ref(`sessions/${sessionId}/tx`).once('value')).val()
-  return tx.to == to && tx.value == value && tx.gasPrice == gasPrice && tx.gasLimit == gasLimit && tx.nonce == nonce && tx.data == data
+  return (tx.to == to && tx.value == value && tx.gasPrice == gasPrice && tx.gasLimit == gasLimit && tx.nonce == nonce && tx.data == data) || (signature == tx.signature && signatureMessage == tx.signatureMessage)
 }
 
 const startSocket = (connectorName, sessionId, addressCB, txIdCB) => {
@@ -70,6 +82,19 @@ const startSocket = (connectorName, sessionId, addressCB, txIdCB) => {
       window.localStorage.removeItem(connectorName)
     }
     txIdCB(tx)
+  })
+}
+
+const startSignatureSocket = (connectorName, sessionId, addressCB, messageSignedCB) => {
+  firebase.database().ref(`sessions/${sessionId}/address`).on('value', (snapshot) => {
+    addressCB(snapshot.val())
+  })
+  firebase.database().ref(`sessions/${sessionId}/messageSigned`).on('value', (snapshot) => {
+    const messageSigned = snapshot.val()
+    if (messageSigned) {
+      window.localStorage.removeItem(connectorName)
+    }
+    messageSignedCB(messageSigned)
   })
 }
 
